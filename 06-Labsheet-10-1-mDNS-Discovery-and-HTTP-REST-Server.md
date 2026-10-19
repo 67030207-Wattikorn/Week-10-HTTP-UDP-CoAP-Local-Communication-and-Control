@@ -660,15 +660,22 @@ Invoke-RestMethod -Uri "http://esp32-node.local/api/led" -Method POST -ContentTy
 ```
 #### สามารถสังเกตสถานะหลอดไฟ LED บนบอร์ด ESP32 ติด/ดับตามคำสั่ง และข้อความตอบกลับ เป็น 
 
-```
-result
-------
-success
-```
+ตรวจสอบ mDNS ด้วยคำสั่ง ping
+<img width="1470" height="956" alt="ภาพถ่ายหน้าจอ 2569-10-19 เวลา 09 08 32" src="https://github.com/user-attachments/assets/3416c35f-6e84-4c92-b868-2763182b3df7" />
+
+ทดสอบอ่านค่าเซนเซอร์ผ่าน cURL
+<img width="1470" height="956" alt="ภาพถ่ายหน้าจอ 2569-10-19 เวลา 09 08 37" src="https://github.com/user-attachments/assets/22c27a32-eb00-40ce-a8ab-b990d758dd4c" />
+
+ทดสอบสั่งเปิด-ปิด LED
+<img width="1470" height="956" alt="ภาพถ่ายหน้าจอ 2569-10-19 เวลา 09 11 12" src="https://github.com/user-attachments/assets/cef74489-b269-4cfe-b127-491a15e05ba4" />
+
 
 ---
 
 ## 4. บันทึกผลการทดลองและคำถามท้ายการทดลอง
 1. นำผลการรัน `curl -i` (โหมด verbose เพื่อดู HTTP Response Header) มาแปะในรายงาน พร้อมวิเคราะห์ว่า HTTP Header มีขนาดกี่ไบต์ และข้อมูล JSON มีขนาดกี่ไบต์
+   ตอบ:ใช้คำสั่ง curl -i เพื่อดู HTTP Response Header และ JSON Body โดยขนาดไบต์ต้องวัดจากผลลัพธ์จริง ค่า Content-Length ระบุขนาด Body
 2. หากในเครือข่ายมีคอมพิวเตอร์ที่ไม่รองรับ mDNS หรือปิดกั้นพอร์ต UDP 5353 จะเกิดผลกระทบอย่างไร และแก้ไขได้อย่างไร?
+   ตอบ:หากไม่รองรับ mDNS หรือถูกบล็อก UDP Port 5353 จะไม่สามารถค้นหา ESP32 ผ่านชื่อ esp32-node.local ได้ ควรเข้าผ่าน IP Address โดยตรง หรืออนุญาต UDP Port       5353
 3. เหตุใดจึงต้องเรียกคำสั่ง `cJSON_Delete(root)` และ `cJSON_free(resp)` เสมอหลังจากประมวลผลเสร็จสิ้น?
+   ตอบ:cJSON_Delete(root) ใช้คืนหน่วยความจำของโครงสร้าง JSON ส่วน cJSON_free(resp) ใช้คืนหน่วยความจำของข้อความ JSON เพื่อป้องกัน Memory Leak และช่วยให้ ESP32    ทำงานได้อย่างมีเสถียรภาพ
