@@ -583,9 +583,30 @@ if rtt_list:
     print(f"\nAverage UDP RTT Latency: {avg_rtt:.2f} ms (Min: {min(rtt_list):.2f} ms, Max: {max(rtt_list):.2f} ms)")
 ```
 
+คำสั่ง Build และ Flash โปรเจกต์
+<img width="1470" height="956" alt="ภาพถ่ายหน้าจอ 2569-10-19 เวลา 09 32 38" src="https://github.com/user-attachments/assets/20d616eb-1080-408c-a2f2-ecf6d860ced5" />
+
+
+การทดสอบด้วยสคริปต์ Python บนคอมพิวเตอร์
+<img width="1470" height="956" alt="ภาพถ่ายหน้าจอ 2569-10-19 เวลา 09 32 09" src="https://github.com/user-attachments/assets/6722a917-c590-477d-ad85-8b8f2690c567" />
+
+
+สคริปต์ทดสอบคำสั่งควบคุมและวัด RTT Latency
+<img width="1470" height="956" alt="ภาพถ่ายหน้าจอ 2569-10-19 เวลา 09 32 09" src="https://github.com/user-attachments/assets/69623d21-42c8-48be-88ee-19207e5d80d0" />
+
+
 ---
 
 ## 4. บันทึกผลการทดลองและคำถามท้ายการทดลอง 
 1. นำผลการวัดค่า RTT Latency ของ UDP ในกิจกรรมที่ 10-2.5 มาเปรียบเทียบกับความหน่วงเวลาของ HTTP RESTful ในใบงาน 10.1 และวิเคราะห์ความแตกต่าง
+
+ตอบ:UDP มี RTT Latency ต่ำกว่า HTTP RESTful เพราะมี Header เล็กและไม่ต้องสร้างการเชื่อมต่อ จึงเหมาะกับงาน IoT แบบ Real-time
+
 2. รันสคริปต์ `udp_listener.py` เป็นเวลา 1 นาที จงบันทึกค่าและคำนวณอัตราการสูญหายของแพ็กเก็ต (Packet Loss Rate) พร้อมวิเคราะห์สาเหตุที่ทำให้เกิดการสูญหายบนเครือข่าย Wi-Fi
+
+ตอบ:ทดสอบ 1 นาที คาดว่าจะส่ง 600 แพ็กเก็ต คำนวณอัตราการสูญหายด้วยสูตร <img width="300" height="50" alt="ภาพถ่ายหน้าจอ 2569-10-19 เวลา 09 37 32" src="https://github.com/user-attachments/assets/86d6abd3-f7c3-4228-a1e3-1ef4211380e5" />
+ สาเหตุอาจเกิดจากสัญญาณรบกวนหรือ Wi-Fi แออัด
+
 3. อธิบายข้อดีและข้อจำกัดของการใช้ `255.255.255.255` (UDP Broadcast) ในระบบ IoT และในสถานการณ์ใดที่ควรเปลี่ยนไปใช้ **UDP Multicast** หรือ **Unicast** แทน?
+
+ตอบ:UDP Broadcast ส่งข้อมูลถึงหลายอุปกรณ์ในเครือข่ายเดียวกันได้ แต่ไม่รับประกันการส่งถึงปลายทาง ควรใช้ Multicast กับกลุ่มอุปกรณ์ และ Unicast เมื่อต้องการส่งถึงอุปกรณ์เฉพาะเครื่อง
