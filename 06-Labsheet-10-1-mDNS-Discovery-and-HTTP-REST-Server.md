@@ -674,8 +674,13 @@ Invoke-RestMethod -Uri "http://esp32-node.local/api/led" -Method POST -ContentTy
 
 ## 4. บันทึกผลการทดลองและคำถามท้ายการทดลอง
 1. นำผลการรัน `curl -i` (โหมด verbose เพื่อดู HTTP Response Header) มาแปะในรายงาน พร้อมวิเคราะห์ว่า HTTP Header มีขนาดกี่ไบต์ และข้อมูล JSON มีขนาดกี่ไบต์
+   
    ตอบ:ใช้คำสั่ง curl -i เพื่อดู HTTP Response Header และ JSON Body โดยขนาดไบต์ต้องวัดจากผลลัพธ์จริง ค่า Content-Length ระบุขนาด Body
+   
 2. หากในเครือข่ายมีคอมพิวเตอร์ที่ไม่รองรับ mDNS หรือปิดกั้นพอร์ต UDP 5353 จะเกิดผลกระทบอย่างไร และแก้ไขได้อย่างไร?
+   
    ตอบ:หากไม่รองรับ mDNS หรือถูกบล็อก UDP Port 5353 จะไม่สามารถค้นหา ESP32 ผ่านชื่อ esp32-node.local ได้ ควรเข้าผ่าน IP Address โดยตรง หรืออนุญาต UDP Port       5353
+
 3. เหตุใดจึงต้องเรียกคำสั่ง `cJSON_Delete(root)` และ `cJSON_free(resp)` เสมอหลังจากประมวลผลเสร็จสิ้น?
+   
    ตอบ:cJSON_Delete(root) ใช้คืนหน่วยความจำของโครงสร้าง JSON ส่วน cJSON_free(resp) ใช้คืนหน่วยความจำของข้อความ JSON เพื่อป้องกัน Memory Leak และช่วยให้ ESP32    ทำงานได้อย่างมีเสถียรภาพ
