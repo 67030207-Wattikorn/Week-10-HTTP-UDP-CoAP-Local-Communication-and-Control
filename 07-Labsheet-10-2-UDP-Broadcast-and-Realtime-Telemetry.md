@@ -584,6 +584,13 @@ if rtt_list:
 ```
 
 ---
+สคริปต์ดักฟังข้อมูล Telemetry Broadcast (`udp_listener.py`)
+<img width="1470" height="956" alt="การทดสอบด้วยสคริปต์ Python บนคอมพิวเตอร์" src="https://github.com/user-attachments/assets/04b2beaf-5e5d-4903-9219-01e90116cd68" />
+
+
+สคริปต์ทดสอบคำสั่งควบคุมและวัด RTT Latency (`udp_controller.py`)
+<img width="1470" height="956" alt="การทดสอบด้วยสคริปต์ Python บนคอมพิวเตอร์" src="https://github.com/user-attachments/assets/8371a4c2-9c84-40c5-bc9c-b9b986b24108" />
+
 
 ## 4. บันทึกผลการทดลองและคำถามท้ายการทดลอง 
 1. นำผลการวัดค่า RTT Latency ของ UDP ในกิจกรรมที่ 10-2.5 มาเปรียบเทียบกับความหน่วงเวลาของ HTTP RESTful ในใบงาน 10.1 และวิเคราะห์ความแตกต่าง
