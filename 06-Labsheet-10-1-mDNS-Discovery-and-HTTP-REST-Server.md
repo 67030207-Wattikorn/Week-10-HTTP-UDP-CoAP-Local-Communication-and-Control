@@ -1,4 +1,4 @@
-<img width="1470" height="956" alt="ตรวจสอบ mDNS ด้วยคำสั่ง ping" src="https://github.com/user-attachments/assets/2f3cc4e0-45ff-4f59-bd73-97100220e636" /># ใบงานการทดลองที่ 10.1
+
 ### การพัฒนาระบบค้นหาอุปกรณ์ด้วย mDNS และเว็บเซิร์ฟเวอร์ควบคุมอุปกรณ์ผ่าน HTTP RESTful API บน ESP-IDF
 
 > [!NOTE] **คำชี้แจง**
